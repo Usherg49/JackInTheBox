@@ -1,0 +1,82 @@
+:root{
+    --primary-color: #1d5888;
+    --seondary-color: #ff993b;
+    --dark-color: #292929;
+    --white-color: #e7e7e7;
+    --my-purple-light: #BB8AF3;
+    --my-purple-medium: #8E52CB;
+    --my-purple-dark: #5C2599;
+}
+body{
+    color: var(--dark-color);
+}
+
+nav{
+    background-color: var(--dark-color);
+}
+
+footer{
+    background-color: var(--dark-color);
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: var(--primary-color);
+}
+
+footer{
+    padding-right: 1rem;
+}
+
+footer .social>a{
+    color: var(--white-color);
+    opacity: 0.75;
+}
+
+footer .social>a:hover{
+    color: var(--my-purple-medium);
+    opacity: 0.9;
+}
+
+.bsicon{
+    color: #8312FA;
+}
+
+.jsicon{
+    color: #F0DB4F;
+}
+
+.html5icon{
+    color: #E44D26;
+}
+
+.css3icon{
+    color: #0A71B8;
+}
+
+.checklist > li i{
+    color: var(--my-purple-medium);
+}
+
+code[class*="language-"],
+        pre[class*="language-"] {
+            white-space: pre-wrap;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+main>.container {
+    padding: 60px 15px 0;
+    margin-bottom: 5rem;
+}
+.sticky-footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+    .responsiveicon {
+        font-size: 18vw;
+    }
+}
