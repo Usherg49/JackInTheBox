@@ -6,6 +6,8 @@
     --my-purple-light: #BB8AF3;
     --my-purple-medium: #8E52CB;
     --my-purple-dark: #5C2599;
+    --jack-in-the-box-theme-blue: #3886C3;
+    --jack-in-the-box-theme-yellow: #FCDA5E;
 }
 body{
     color: var(--dark-color);
@@ -20,7 +22,7 @@ footer{
 }
 
 h1,h2,h3,h4,h5,h6{
-    color: var(--primary-color);
+    color: var(--jack-in-the-box-theme-blue);
 }
 
 footer{
@@ -33,7 +35,7 @@ footer .social>a{
 }
 
 footer .social>a:hover{
-    color: var(--my-purple-medium);
+    color: var(--jack-in-the-box-theme-yellow);
     opacity: 0.9;
 }
 
@@ -54,7 +56,20 @@ footer .social>a:hover{
 }
 
 .checklist > li i{
-    color: var(--my-purple-medium);
+    color: var(--jack-in-the-box-theme-yellow);
+}
+
+.Jack{
+    color: blue;
+}
+
+.Box{
+    color: yellow;
+}
+
+.Jack-in-the-Box{
+    color: red;
+    font-weight: bold;
 }
 
 code[class*="language-"],
@@ -75,8 +90,34 @@ main>.container {
     width: 100%;
 }
 
+.JIBTransparent {
+    background-image: url(/img/JIBTransparent.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+    background-size: contain;
+}
+
 @media screen and (max-width: 400px) {
     .responsiveicon {
         font-size: 18vw;
     }
 }
+
+@media screen and (max-width: 991.33px) {
+    .border-responsive {
+        border: none !important;
+    }
+}
+
+@media screen and (max-width: 991.33px) {
+    .JIB-picture {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 991.33px) {
+    .JIBTransparent {
+      background-image: none;
+    }
+  }

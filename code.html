@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Usher Gluck</title>
+    <title>Jack in the Box: A Coding Project by Usher Gluck</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/UGLogoInverted.svg" class="d-inline-block" width="25" height="20" >&nbsp;APP NAME</a>
+            <a class="navbar-brand" href="#"><img src="/img/JIBHead.svg" class="d-inline-block" height="30" width="30">&nbsp;Jack in the Box</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,21 +52,229 @@
     <!-- Main Section -->
     <main class="flex-shrink-0">
         <div class="container py-6 px-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for Jack in the B<img src="/img/JIBHead.svg" height="20" width="20">x</h2>
             <div class="row row-cols-1 row-cols-lg-2">
-                <div class="col-lg-8">
+                <div class="col-lg-8 order-last order-lg-first">
                     <pre class="line-numbers"><code class="language-javascript">
-                            //Call hello world
-                            function helloWorld(){
-                                alert("Hello World")
+                        //Get the values from the page
+                        //Starts the controller function
+                        function getValues(){
+                            let jackAge = document.getElementById("jackAge").value;
+                            let boxSize = document.getElementById("boxSize").value;
+                        
+                            jackAge = parseInt(jackAge);
+                            boxSize = parseInt(boxSize);
+                        
+                            if(Number.isInteger(jackAge) && Number.isInteger(boxSize)){
+                                
+                                //Choosing a function to call generateMultiples, based on user input in radio buttons
+                                if(document.getElementById("forLoop").checked){
+                                    outputValues = generateMultiplesForLoop(jackAge, boxSize);
+                                }else if(document.getElementById("switchStatement").checked){
+                                    outputValues = generateMultiplesSwitchStatement(jackAge, boxSize);
+                                }else{
+                                    outputValues = generateMultiplesTernaryOperator(jackAge, boxSize);
+                                }
+                                displayResultsTemplateTags(outputValues);
+                                
+                                //Ucomment line below to use Template Literals to diplay the results. (Also uncomment line 94)
+                                //displayResultsTemplateLiterals(outputValues);
+                            }else{
+                                alert("Please enter valid numbers.");
                             }
+                        }
+                        
+                        //Calculate whether numbers are multiples of Jack, Box or both
+                        //Using a for-loop to generate multiples
+                        function generateMultiplesForLoop(jackAge, boxSize){
+                            
+                            let outputValues = [];
+                        
+                            for(i = 1; i <= 1000; i++){
+                                if(i % jackAge == 0 && i % boxSize == 0){
+                                    outputValues.push("Jack-in-the-Box");
+                                }else if(i % jackAge == 0){
+                                    outputValues.push("Jack");
+                                }else if(i % boxSize == 0){
+                                    outputValues.push("Box");
+                                }else{
+                                    outputValues.push(i);
+                                }
+                            }
+                            return outputValues;
+                        }
+                        
+                        //Using the Switch Statement to generate multiples
+                        function generateMultiplesSwitchStatement(jackAge, boxSize){
+                            let outputValues = [];
+                            
+                            let jack = false;
+                            let box = false;
+                        
+                            for(let i = 1; i <= 1000; i++){
+                                jack = i % jackAge == 0;
+                                box = i % boxSize == 0;
+                            
+                                switch (true) {
+                                case jack && box:
+                                    outputValues.push("Jack-in-the-Box");
+                                    break;
+                        
+                                case jack:
+                                    outputValues.push("Jack");
+                                    break;
+                        
+                                case box:
+                                    outputValues.push("Box");
+                                    break;
+                            
+                                default:
+                                    outputValues.push(i);
+                                }
+                            }
+                            return outputValues;
+                        }
+                        
+                        //Using a Ternary Operator to generate multiples
+                        function generateMultiplesTernaryOperator(jackAge, boxSize){
+                            let outputValues = [];
+                        
+                            for(i = 1; i <= 1000; i++){
+                                let value = ((i % jackAge == 0 ? "Jack" : "") + (i % boxSize == 0 ? "Box" : "") || i);
+                                let updatedValue = (value == "JackBox" ? "Jack-in-the-Box" : value);
+                                outputValues.push(updatedValue);
+                            }
+                            return outputValues;
+                        }
+                        
+                        //Display the Results Using Template Literals
+                        //Uncomment the block below to use this function. (Also uncomment line 23)
+                        /* 
+                        function displayResultsTemplateLiterals(outputValues){
+                            let templateRows = "<tr>";
+                        
+                            for(let i = 0; i < outputValues.length; i++){
+                                if((i + 1) % 4 == 0){
+                                    templateRows += `<td>${outputValues[i]}</td></tr><tr>`;
+                                }else{
+                                    templateRows += `<td>${outputValues[i]}</td>`
+                                }
+                            }
+                            //Remove the extra <tr> at the end, then adding it to the innerHTML
+                            templateRows = templateRows.slice(0, -4)
+                            document.getElementById("results").innerHTML = templateRows;
+                        } 
+                        */
+                        
+                        //Display the results using Template Tags
+                        function displayResultsTemplateTags(outputValues){
+                            let tableBody = document.getElementById("results");
+                            let templateRow = document.getElementById("jibTemplate");
+                        
+                            tableBody.innerHTML = "";
+                        
+                            for(i = 0; i < outputValues.length; i += 4){
+                                let tableRow = document.importNode(templateRow.content, true);
+                        
+                                let rowCols = tableRow.querySelectorAll("td");
+                                
+                                rowCols[0].classList.add(outputValues[i]);
+                                rowCols[0].textContent = outputValues[i];
+                                
+                                rowCols[1].classList.add(outputValues[i + 1]);
+                                rowCols[1].textContent = outputValues[i + 1];
+                                
+                                rowCols[2].classList.add(outputValues[i + 2]);
+                                rowCols[2].textContent = outputValues[i + 2];
+                                
+                                rowCols[3].classList.add(outputValues[i + 3]);
+                                rowCols[3].textContent = outputValues[i + 3];
+                        
+                                tableBody.appendChild(tableRow);
+                            }
+                        }
+                        
                         </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is Structured in one Function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with the message: "Hello World".</p>
+                    <p class="text-center fw-bolder">
+                        The code for Jack in the Box displays the results by running three functions. 
+                        After collecting user input in the controller method, it calls one of three other, 
+                        user-selected functions to generate the results. 
+                        Finally, it moves to the third function to display the data to the user.
+                    </p>
+                    <h5><strong>Function 1:</strong></h5>
+                    <p>
+                        When the “Jack the Box” button is clicked, the controller function 
+                        <code>getValues</code> is called. It takes the two values entered by the user, 
+                        and parses them to an <code>int</code>. After validating the user input, 
+                        it calls the second function.
+                    </p>
+                    <p>
+                        This second function will generate the multiples
+                        of the user’s numbers using one of three methods, based on which one the user chooses.
+                        The choices are: <ol type="A"><li>For-Loop</li><li>Switch Statement</li><li>Ternary Operator</li></ol>
+                        All three of these begin by declaring an empty array called <code>outputValues</code>, 
+                        and then continue as outlined below.
+                    </p>
+                    <p>
+                        Finally, it calls the <code>displayResultsTemplateTags</code> function which is 
+                        responsible for displaying the data to the user.
+                    </p>
+                    <p>
+                        <strong>Note</strong>: While all three functions produce identical results, the purpose of
+                        providing the choice is to offer diversity in the portfolio.
+                    </p>
+                    <h5><strong>Function 2:</strong> <small>(For-Loop)</small></h5>
+                    <p>
+                        The <code>generateMultiplesForLoop</code> function uses a for loop to iterate 
+                        through the numbers 1-1,000. It checks each number using <code>if</code> and 
+                        <code>else if</code> statements, and if it is a multiple of 
+                        both numbers entered by the user, it adds “Jack-in-the-Box” to the 
+                        <code>outputValues</code> array. If it is a multiple of the first or second numbers only, 
+                        it’ll add to the array either “Jack” or “Box”, respectively. 
+                        Finally, if the number isn’t a multiple of either of the numbers in the user input, 
+                        it’ll add the number itself to the array.
+                    </p>
+                    <h5><strong>Function 2:</strong> <small>(Switch Statement)</small></h5>
+                    <p>
+                        The <code>generateMultiplesSwitchStatement</code> function starts off by declaring 
+                        two Boolean variables <code>jack</code> and <code>box</code>, and sets their values to false. 
+                        Afterward, it iterates 1-1,000 and uses the modulus operator to set the value of either 
+                        <code>jack</code> or <code>box</code> to true. Finally, it sizes up the output against cases, 
+                        in which the statement chooses whether <code>jack</code>, <code>box</code>, or both are true, 
+                        and adds the value of each case to the <code>outputValues</code> array. 
+                        The default is when neither <code>jack</code> nor <code>box</code> are true, 
+                        and it in that case it’ll add the number of that particular iteration to the array.
+                    </p>
+                    <h5><strong>Function 2:</strong> <small>(Ternary Operator)</small></h5>
+                    <p>
+                        Like the previous two, the <code>generateMultiplesTernaryOperator</code> function also iterates 
+                        1-1,000. Next, it declares a variable <code>value</code>, and sets its value based upon 
+                        whether the iteration mod the user input is equal to 0 or not. 
+                        If neither of them are 0 it uses the or (<code>||</code>) statement to add the number itself. 
+                        Finally, it rewrites every <code>JackBox</code> to <code>Jack-in-the-Box</code> before 
+                        adding it to the <code>outputValues</code> array.
+                    </p>
+                    <h5><strong>Function 3</strong>:</h5>
+                    <p>
+                        The <code>displayResultsTemplateTags</code> method displays the <code>outputValues</code> by 
+                        utilizing a template portion in the HTML page, and using a loop to replicate itself 
+                        as needed. This function imports the content of a node and uses a query selector 
+                        to iterate through the <code>td</code> tags of the template element. 
+                        At each iteration it adds the next value in the <code>outputValues</code> array. 
+                        Next it appends the <code>tr</code> with the data of the current iteration 
+                        as a child to the table body.
+                    </p>
+                    <h5><strong>Optional Function</strong>:</h5>
+                    <p>
+                        There is another function visible in the code, however, it is commented out. 
+                        This method is added as an option and it can be uncommented for use. 
+                        This function uses template literals to add the table to the UI. 
+                        At the end, it cleans up the remaining <code>tr</code>, before adding it as 
+                        <code>innerHTML</code> to the results section.
+                    </p>
                 </div>
             </div>
         </div>
